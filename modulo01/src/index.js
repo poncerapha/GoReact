@@ -1,44 +1,39 @@
-import React, { Component, Fragment } from "react";
-import { render } from "react-dom";
-import PropTypes from "prop-types";
+import React, { Component, Fragment } from 'react';
+import { render } from 'react-dom';
 
-class Button extends Component {
-  static defaultProps = {
-    children: "Salvar"
-  };
+import Button from './Button';
 
-  static PropTypes = {
-    onClick: PropTypes.func.isRequired,
-    children: PropTypes.string
-  };
-
-  render() {
-    return (
-      <a href="" onClick={this.props.onClick}>
-        {this.props.children}
-      </a>
-    );
-  }
-}
+import './style.scss';
 
 class App extends Component {
-  handleClick() {
-    alert("botão clicado");
-  }
+  state = {
+    counter: 0,
+  };
+
+  componentDidMount() {}
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextState.counter <= 10;
+  // }
+  // componentDidUpdate(prevProps, prevState) {}
+
+  // componentWillMount() {}
+
+  handleClick = () => {
+    const { counter } = this.state;
+    this.setState({ counter: counter + 1 });
+  };
 
   render() {
+    const { counter } = this.state;
     return (
       <Fragment>
-        <h1>Hello</h1>
-        <Button
-          onClick={() => {
-            alert("Button 1");
-          }}
-        />
-        <Button onClick={this.handleClick}>Enviar</Button>
+        <h1 className="title">Hello</h1>
+        <h2 style={{ color: '#f00' }}>{counter}</h2>
+        <Button onClick={this.handleClick}>Somar</Button>
       </Fragment>
     );
   }
 }
 
-render(<App />, document.getElementById("app"));
+render(<App />, document.getElementById('app'));
